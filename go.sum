@@ -1,0 +1,6 @@
+github.com/go-playground/form v3.1.3+incompatible h1:GY0v2KFh5AYLVffrkgCFcaN7hcFaX8VXMOAGQ+WtpZs=
+github.com/go-playground/form v3.1.3+incompatible/go.mod h1:lhcKXfTuhRtIZCIKUeJ0b5F207aeQCPbZU09ScKjwWg=
+github.com/go-playground/pure v4.1.1+incompatible h1:PqiTIRTuDUVMAQBarK9VdI93Iy7P9+iHXtAa6UaPvEU=
+github.com/go-playground/pure v4.1.1+incompatible/go.mod h1:k2eRJXw80qTBI0vn3rVf3CcZRLtdbPb0FPV7sDZGk5o=
+github.com/mdempsky/gocode v0.0.0-20180727200127-00e7f5ac290a h1:ecO2aKe95WVgaFwU2NH0OefPUnwrGcsC4+hfokbKESM=
+github.com/mdempsky/gocode v0.0.0-20180727200127-00e7f5ac290a/go.mod h1:hltEC42XzfMNgg0S1v6JTywwra2Mu6F6cLR03debVQ8=
