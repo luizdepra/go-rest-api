@@ -23,9 +23,9 @@ func (a *App) RegisterRoutes() {
 	a.Router.Get("/", route.RootHandler)
 
 	tasks := a.Router.Group("/tasks")
-	tasks.Get("", route.ListTasksHandler)
+	tasks.Get("/", route.ListTasksHandler)
 	tasks.Post("/", route.CreateTaskHandler)
-	tasks.Get("/:id", route.GetTaskHandler)
-	tasks.Put("/:id", route.UpdateTaskHandler)
-	tasks.Delete("/:id", route.DeleteTaskHandler)
+	tasks.Get("/:id/", route.GetTaskHandler)
+	tasks.Put("/:id/", route.UpdateTaskHandler)
+	tasks.Delete("/:id/", route.DeleteTaskHandler)
 }
