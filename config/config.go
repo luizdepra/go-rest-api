@@ -7,7 +7,8 @@ import (
 
 // Config holds the API configuration values.
 type Config struct {
-	ServerPort uint16
+	ServerPort   uint16
+	DatabasePath string
 }
 
 // GetEnvOrDefault reads and returns a value from a Env variable, if it is set.
@@ -28,7 +29,10 @@ func ReadConfig() (*Config, error) {
 		return nil, err
 	}
 
+	path := GetEnvOrDefault("DATABASE_PATH", "./tasks.sqlite")
+
 	return &Config{
-		ServerPort: uint16(serverPort),
+		ServerPort:   uint16(serverPort),
+		DatabasePath: path,
 	}, nil
 }
