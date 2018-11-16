@@ -13,3 +13,7 @@
 
 # Default binary name
 go-rest-api
+
+# Database files
+*.sqlite
+*.db

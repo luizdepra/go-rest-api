@@ -1,0 +1,10 @@
+CREATE TABLE `tasks` (
+	`id`	INTEGER PRIMARY KEY AUTOINCREMENT,
+	`title`	VARCHAR(255) NOT NULL,
+	`priority`	INTEGER NOT NULL,
+	`done`	BOOLEAN NOT NULL
+);
+
+INSERT INTO tasks VALUES (1, "Task 01", 0, 1);
+INSERT INTO tasks VALUES (2, "Task 02", 1, 0);
+INSERT INTO tasks VALUES (3, "Task 03", 99, 0);
