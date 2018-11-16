@@ -28,8 +28,11 @@ Returns all stored tasks.
 
 #### Response Status
 
-| 200 | Ok                    |
-| 500 | Internal Server Error |
+
+| Code | Description           |
+| ---- | --------------------- |
+| 200  | Ok                    |
+| 500  | Internal Server Error |
 
 #### Response Data
 
@@ -76,9 +79,11 @@ Stores a new task.
 
 #### Response Status
 
-| 201 | Created               |
-| 400 | Bad Request           |
-| 500 | Internal Server Error |
+| Code | Description           |
+| ---- | --------------------- |
+| 201  | Created               |
+| 400  | Bad Request           |
+| 500  | Internal Server Error |
 
 #### Response Data
 
@@ -101,10 +106,12 @@ Returns a tasks by its id.
 
 #### Response Status
 
-| 200 | Ok                    |
-| 400 | Bad Request           |
-| 404 | Not Found             |
-| 500 | Internal Server Error |
+| Code | Description           |
+| ---- | --------------------- |
+| 200  | Ok                    |
+| 400  | Bad Request           |
+| 404  | Not Found             |
+| 500  | Internal Server Error |
 
 #### Response Data
 
@@ -134,13 +141,16 @@ Updates a stored task with the provided data by its id.
     "priority": 7,
     "done": false
 }
+```
 
 #### Response Status
 
-| 200 | Ok                    |
-| 400 | Bad Request           |
-| 404 | Not Found             |
-| 500 | Internal Server Error |
+| Code | Description           |
+| ---- | --------------------- |
+| 200  | Ok                    |
+| 400  | Bad Request           |
+| 404  | Not Found             |
+| 500  | Internal Server Error |
 
 #### Response Data
 
@@ -163,10 +173,12 @@ Removes a stored task by its id.
 
 #### Response Status
 
-| 200 | Ok                    |
-| 400 | Bad Request           |
-| 404 | Not Found             |
-| 500 | Internal Server Error |
+| Code | Description           |
+| ---- | --------------------- |
+| 200  | Ok                    |
+| 400  | Bad Request           |
+| 404  | Not Found             |
+| 500  | Internal Server Error |
 
 #### Response Data
 
