@@ -4,21 +4,26 @@ import (
 	"net/http"
 
 	"github.com/luizdepra/go-rest-api/app/model"
+	"github.com/luizdepra/go-rest-api/app/repository"
 )
 
 // ListTasksHandler handles the Task listing request.
 //
 // GET /tasks/
-func ListTasksHandler(writer http.ResponseWriter, request *http.Request) {
-	payload := getAllTasks()
+func ListTasksHandler(repo *repository.TaskRepository, writer http.ResponseWriter, request *http.Request) {
+	data, err := repo.List()
+	if err != nil {
+		MakeJSONErrorResponse(writer, http.StatusInternalServerError, err.Error())
+		return
+	}
 
-	MakeJSONResponse(writer, http.StatusOK, payload)
+	MakeJSONResponse(writer, http.StatusOK, data)
 }
 
 // CreateTaskHandler handles the Task creation request.
 //
 // POST /tasks/
-func CreateTaskHandler(writer http.ResponseWriter, request *http.Request) {
+func CreateTaskHandler(repo *repository.TaskRepository, writer http.ResponseWriter, request *http.Request) {
 	var task model.Task
 
 	err := decodeTask(request, &task)
@@ -27,28 +32,37 @@ func CreateTaskHandler(writer http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	addTask(&task)
+	data, err := repo.Create(&task)
+	if err != nil {
+		MakeJSONErrorResponse(writer, http.StatusInternalServerError, err.Error())
+		return
+	}
 
-	MakeJSONResponse(writer, http.StatusCreated, task)
+	MakeJSONResponse(writer, http.StatusCreated, data)
 }
 
 // GetTaskHandler handles the Task retreave request.
 //
 // GET /tasks/:id
-func GetTaskHandler(writer http.ResponseWriter, request *http.Request, id int64) {
-	task := getTask(id)
-	if task == nil {
+func GetTaskHandler(repo *repository.TaskRepository, writer http.ResponseWriter, request *http.Request, id int64) {
+	data, err := repo.Get(id)
+	if err != nil {
+		MakeJSONErrorResponse(writer, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	if data == nil {
 		MakeJSONErrorResponse(writer, http.StatusNotFound, "task not found")
 		return
 	}
 
-	MakeJSONResponse(writer, http.StatusOK, task)
+	MakeJSONResponse(writer, http.StatusOK, data)
 }
 
 // UpdateTaskHandler handles the Task update request.
 //
 // PUT /tasks/:id
-func UpdateTaskHandler(writer http.ResponseWriter, request *http.Request, id int64) {
+func UpdateTaskHandler(repo *repository.TaskRepository, writer http.ResponseWriter, request *http.Request, id int64) {
 	var task model.Task
 
 	err := decodeTask(request, &task)
@@ -57,24 +71,36 @@ func UpdateTaskHandler(writer http.ResponseWriter, request *http.Request, id int
 		return
 	}
 
-	updatedTask := updateTask(id, &task)
-	if updatedTask == nil {
+	task.ID = id
+
+	data, err := repo.Update(&task)
+	if err != nil {
+		MakeJSONErrorResponse(writer, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	if data == nil {
 		MakeJSONErrorResponse(writer, http.StatusNotFound, "task not found")
 		return
 	}
 
-	MakeJSONResponse(writer, http.StatusOK, updatedTask)
+	MakeJSONResponse(writer, http.StatusOK, data)
 }
 
 // DeleteTaskHandler handles the Task deletion request.
 //
 // DELETE /tasks/:id
-func DeleteTaskHandler(writer http.ResponseWriter, request *http.Request, id int64) {
-	task := deleteTask(id)
-	if task == nil {
+func DeleteTaskHandler(repo *repository.TaskRepository, writer http.ResponseWriter, request *http.Request, id int64) {
+	data, err := repo.Delete(id)
+	if err != nil {
+		MakeJSONErrorResponse(writer, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	if data == nil {
 		MakeJSONErrorResponse(writer, http.StatusNotFound, "task not found")
 		return
 	}
 
-	MakeJSONResponse(writer, http.StatusOK, task)
+	MakeJSONResponse(writer, http.StatusOK, data)
 }
