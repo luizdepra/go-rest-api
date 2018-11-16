@@ -11,6 +11,7 @@ import (
 
 	"github.com/luizdepra/go-rest-api/app"
 	"github.com/luizdepra/go-rest-api/config"
+	"github.com/luizdepra/go-rest-api/middleware"
 )
 
 func main() {
@@ -20,6 +21,7 @@ func main() {
 	}
 
 	router := pure.New()
+	router.Use(middleware.Logging())
 
 	db, err := sql.Open("sqlite3", cfg.DatabasePath)
 	if err != nil {
