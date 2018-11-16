@@ -1,23 +1,29 @@
 package app
 
 import (
+	"database/sql"
 	"net/http"
 	"strconv"
 
 	"github.com/go-playground/pure"
 
+	"github.com/luizdepra/go-rest-api/app/repository"
 	"github.com/luizdepra/go-rest-api/app/route"
 )
 
 // App holds common API structures.
 type App struct {
-	Router *pure.Mux
+	Router     *pure.Mux
+	Repository *repository.TaskRepository
 }
 
 // New creates and returns a new App instance.
-func New(router *pure.Mux) *App {
+func New(router *pure.Mux, db *sql.DB) *App {
+	repo := repository.New(db)
+
 	return &App{
-		Router: router,
+		Router:     router,
+		Repository: repo,
 	}
 }
 
@@ -47,12 +53,12 @@ func (app *App) GetRoot(writer http.ResponseWriter, request *http.Request) {
 
 // ListTasks wraps the ListTasksHandler.
 func (app *App) ListTasks(writer http.ResponseWriter, request *http.Request) {
-	route.ListTasksHandler(writer, request)
+	route.ListTasksHandler(app.Repository, writer, request)
 }
 
 // CreateTask wraps the CreateTaskHandler.
 func (app *App) CreateTask(writer http.ResponseWriter, request *http.Request) {
-	route.CreateTaskHandler(writer, request)
+	route.CreateTaskHandler(app.Repository, writer, request)
 }
 
 // GetTask wraps the GetTaskHandler.
@@ -63,7 +69,7 @@ func (app *App) GetTask(writer http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	route.GetTaskHandler(writer, request, id)
+	route.GetTaskHandler(app.Repository, writer, request, id)
 }
 
 // UpdateTask wraps the UpdateTaskHandler.
@@ -74,7 +80,7 @@ func (app *App) UpdateTask(writer http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	route.UpdateTaskHandler(writer, request, id)
+	route.UpdateTaskHandler(app.Repository, writer, request, id)
 }
 
 // DeleteTask wraps the DeleteTaskHandler.
@@ -85,5 +91,5 @@ func (app *App) DeleteTask(writer http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	route.DeleteTaskHandler(writer, request, id)
+	route.DeleteTaskHandler(app.Repository, writer, request, id)
 }

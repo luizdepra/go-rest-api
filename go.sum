@@ -2,5 +2,7 @@ github.com/go-playground/form v3.1.3+incompatible h1:GY0v2KFh5AYLVffrkgCFcaN7hcF
 github.com/go-playground/form v3.1.3+incompatible/go.mod h1:lhcKXfTuhRtIZCIKUeJ0b5F207aeQCPbZU09ScKjwWg=
 github.com/go-playground/pure v4.1.1+incompatible h1:PqiTIRTuDUVMAQBarK9VdI93Iy7P9+iHXtAa6UaPvEU=
 github.com/go-playground/pure v4.1.1+incompatible/go.mod h1:k2eRJXw80qTBI0vn3rVf3CcZRLtdbPb0FPV7sDZGk5o=
+github.com/mattn/go-sqlite3 v1.9.0 h1:pDRiWfl+++eC2FEFRy6jXmQlvp4Yh3z1MJKg4UeYM/4=
+github.com/mattn/go-sqlite3 v1.9.0/go.mod h1:FPy6KqzDD04eiIsT53CuJW3U88zkxoIYsOqkbpncsNc=
 gopkg.in/go-playground/assert.v1 v1.2.1 h1:xoYuJVE7KT85PYWrN730RguIQO0ePzVRfFMXadIrXTM=
 gopkg.in/go-playground/assert.v1 v1.2.1/go.mod h1:9RXL0bg/zibRAgZUYszZSwO/z8Y/a8bDuhia5mkpMnE=

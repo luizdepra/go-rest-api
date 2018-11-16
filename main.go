@@ -1,11 +1,13 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
 	"log"
 	"net/http"
 
 	"github.com/go-playground/pure"
+	_ "github.com/mattn/go-sqlite3"
 
 	"github.com/luizdepra/go-rest-api/app"
 	"github.com/luizdepra/go-rest-api/config"
@@ -19,7 +21,13 @@ func main() {
 
 	router := pure.New()
 
-	app := app.New(router)
+	db, err := sql.Open("sqlite3", cfg.DatabasePath)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+
+	app := app.New(router, db)
 	app.RegisterRoutes()
 
 	serverPort := fmt.Sprintf(":%d", cfg.ServerPort)
